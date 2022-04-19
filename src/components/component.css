@@ -1,0 +1,24 @@
+.close-btn{
+      padding: 4px;
+      border-radius: 3px;
+      background-color: rgb(227 108 109) !important;
+      border: none !important;
+      color:white !important;
+      font-size: 12px !important;
+}
+.close-btn:hover{
+    background-color: tomato !important;
+}
+
+.save-btn{
+      padding: 4px;
+      border-radius: 3px;
+      background-color: rgb(227 108 109) !important;
+      border: none;
+      color:white !important;
+      font-size: 12px !important;
+}
+
+.save-btn:hover{
+    background-color: tomato !important;
+}

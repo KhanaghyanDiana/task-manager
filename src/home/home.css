@@ -1,0 +1,86 @@
+.title{
+    text-align: center;
+    color:white;
+    font-size: 35px;
+    font-weight: bold;
+}
+.todo-wrapper{
+    width: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+
+}
+
+.error-message{
+    color: red;
+    font-size: 12px;
+}
+.todo-input{
+    outline: none;
+    border-radius: 3px;
+    width: 300px;
+    padding: 5px;
+    border: none;
+
+}
+.input-section{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 25px;
+
+
+}
+.createTodo-btn{
+      padding: 5px;
+      border-radius: 3px;
+      background-color: rgb(227 108 109);
+      border: none;
+
+}
+.todo-list{
+    background-color: white;
+    width: 300px;
+    padding: 15px;
+    border-radius: 3px;
+    box-shadow:  0px 0px 10px 10px #888888;
+    margin-top: 25px
+}
+.todo-task{
+    color: black;
+    font-weight: bolder;
+    font-size: 15px;
+}
+.delate-btn{
+      padding: 4px;
+      border-radius: 3px;
+      background-color: rgb(227 108 109);
+      border: none;
+    }
+    .edit-btn{
+      padding: 4px;
+      border-radius: 3px;
+      background-color: rgb(227 108 109);
+      border: none;
+
+    }
+
+    .todo-btns{
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+    }
+    .popup-input{
+        padding: 5px;
+        border-radius: 3px;
+        border: none;
+    }
+    .notask-message{
+        color: white;
+        font-weight: bolder;
+        font-size: 25px;
+        text-align: center;
+    }
