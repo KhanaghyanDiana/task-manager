@@ -1,0 +1,1 @@
+export const ALL_TASK = state => state.taskManagmentReducer.tasks
