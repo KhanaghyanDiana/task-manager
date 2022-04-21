@@ -4,12 +4,13 @@ import { addTask, delateTask, editTask } from "../Redux/actions"
 import { PopUp } from "../components/popup";
 import "./home.css"
 import { ERROR_MESSAGE } from "../Notifications/notifications";
-import { Button } from "../components/button";
+import { TaskActions } from "../todoActions";
+import { ALL_TASK } from "../Redux/selectors";
 export const Home = (props) => {
+
     const { title } = props
     const regName = /^[\w-_.]*$/
-    const allTasks = state => state.taskManagmentReducer.tasks
-    const state = useSelector(allTasks)
+    const state = useSelector(ALL_TASK)
     const dispatch = useDispatch()
     const [taskName, setTaskName] = useState("")
     const [open, setOpen] = React.useState(false);
@@ -83,24 +84,12 @@ export const Home = (props) => {
                 {
                     state.map(item => {
                         return (
-                            <div className="todo-list" key={item && item.id}>
-                                <p className="todo-task">
-                                    {item.todo.toUpperCase()}
-                                </p>
-                                <div className="todo-btns">
-                                    <Button
-                                        item={item.id}
-                                        className="delate-btn"
-                                        onClick={handleDelate}
-                                        label={"Delate"}
-                                    />
-                                    <Button
-                                        item={item.id}
-                                        className="edit-btn"
-                                        onClick={handleClickOpen}
-                                        label={"Click to Edit"}
-                                    />
-                                </div>
+                            <div key={item && item.id}>
+                                <TaskActions
+                                    item={item}
+                                    handleClickOpen={handleClickOpen}
+                                    handleDelate={handleDelate}
+                                />
                             </div>
                         )
                     })
