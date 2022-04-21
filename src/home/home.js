@@ -3,21 +3,24 @@ import { useDispatch, useSelector } from "react-redux"
 import { addTask, delateTask, editTask } from "../Redux/actions"
 import { PopUp } from "../components/popup";
 import "./home.css"
-export const Home = () => {
+import { Button } from "../components/button";
+import { ERROR_MESSAGE } from "../Notifications/notificationMessages";
+export const Home = (props) => {
+    const { title } = props
     const regName = /^[\w-_.]*$/
-    const state = useSelector(state => state.taskManagmentReducer.tasks)
-    const dispatch = useDispatch()
+    const allTasks = state => state.taskManagmentReducer.tasks
+    const state = useSelector(allTasks)
     const [taskName, setTaskName] = useState("")
     const [open, setOpen] = React.useState(false);
     const [idofTask, setIdOfTask] = useState("")
     const [task, setTask] = useState("")
-    const [show, setShow] = useState(true)
+    const [show, setShow] = useState(false)
+    const dispatch = useDispatch()
+
     const handleClickOpen = (idofCurrentTask) => {
         setOpen(true);
         setIdOfTask(idofCurrentTask)
-
     };
-    const [error, setError] = useState("")
 
     useEffect(() => {
         const selectedUser = state.find(id => id.id === Number(idofTask))
@@ -26,9 +29,9 @@ export const Home = () => {
 
     const handleClose = () => {
         setOpen(false);
-
-        dispatch(editTask(task && task))
+        task && dispatch(editTask(task))
     };
+
     const handleAdduser = (e) => {
         setTaskName(e.target.value)
     }
@@ -40,9 +43,8 @@ export const Home = () => {
                 id: Math.floor(Math.random() * 15)
             }
             dispatch(addTask(values))
-
-        } else {
-            setError('Please Use Only Letters And Numbers')
+        }
+        else {
             setTimeout(() => {
                 setShow(!show)
             }, 2000)
@@ -57,14 +59,13 @@ export const Home = () => {
         setTask({
             ...task,
             todo: e.target.value,
-
         })
     }
 
     return (
         <div>
             <div>
-                <p className="title">Task Manager</p>
+                <p className="title">{title}</p>
             </div>
             <div className="todo-wrapper">
                 <div className="input-section">
@@ -76,7 +77,7 @@ export const Home = () => {
                     <button className="createTodo-btn" onClick={handleAddTask}>Create</button>
                 </div>
                 <div >
-                    {show ? <p className="error-message">{error}</p> : ""}
+                    {show && <p className="error-message">{ERROR_MESSAGE}</p>}
                 </div>
                 {
                     state.map(item => {
@@ -86,8 +87,16 @@ export const Home = () => {
                                     {item.todo.toUpperCase()}
                                 </p>
                                 <div className="todo-btns">
-                                    <button className="delate-btn" onClick={() => handleDelate(item.id)}>Delate</button>
-                                    <button className="edit-btn" variant="outlined" onClick={() => handleClickOpen(item.id)}>Click to Edit</button>
+                                    <Button
+                                        item={item.id}
+                                        className="delate-btn"
+                                        onClick={handleDelate}
+                                        label={"Delate"} />
+                                    <Button
+                                        item={item.id}
+                                        className="edit-btn"
+                                        onClick={handleClickOpen}
+                                        label="Click To Edit" />
                                 </div>
                             </div>
                         )
@@ -95,13 +104,23 @@ export const Home = () => {
                 }
 
             </div>
-            {state.length === 0 ? <p className="notask-message">! There Is No Task</p> : ""}
+            {state.length === 0 ?
+                <p className="notask-message">
+                    ! There Is No Task
+                </p>
+                : ""
+            }
             <PopUp
                 handleClose={handleClose}
                 content={
-                    <input className="popup-input" value={task && task.todo} onChange={handleChange} />
+                    <input className="popup-input"
+                        value={task && task.todo}
+                        onChange={handleChange}
+                    />
                 }
+                labelClose={"Close"}
                 open={open}
+                label={"Save"}
             />
         </div >
     )
