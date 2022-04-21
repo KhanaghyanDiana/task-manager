@@ -21,8 +21,6 @@ export const Home = () => {
 
     };
 
-
-
     useEffect(() => {
         const selectedUser = state.find(id => id.id === Number(idofTask))
         setTask(selectedUser)
