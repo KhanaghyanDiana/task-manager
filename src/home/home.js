@@ -5,12 +5,13 @@ import { PopUp } from "../components/popup";
 import "./home.css"
 import { ERROR_MESSAGE } from "../Notifications/notifications";
 import { TaskActions } from "../todoActions";
-import { ALL_TASK } from "../Redux/selectors";
+import { allTask } from "../Redux/selectors";
+
 export const Home = (props) => {
 
     const { title } = props
     const regName = /^[\w-_.]*$/
-    const state = useSelector(ALL_TASK)
+    const state = useSelector(allTask)
     const dispatch = useDispatch()
     const [taskName, setTaskName] = useState("")
     const [open, setOpen] = React.useState(false);
