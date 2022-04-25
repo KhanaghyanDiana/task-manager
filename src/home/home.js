@@ -3,34 +3,38 @@ import { useDispatch, useSelector } from "react-redux"
 import { addTask, delateTask, editTask } from "../Redux/actions"
 import { PopUp } from "../components/popup";
 import "./home.css"
-export const Home = () => {
+import { ERROR_MESSAGE } from "../Notifications/notifications";
+import { TaskActions } from "../todoActions";
+import { allTask } from "../Redux/selectors";
+import { Tasks } from "../javascript/tasks";
 
+export const Home = (props) => {
+
+    const { title } = props
     const regName = /^[\w-_.]*$/
-    const allTasks = state => state.taskManagmentReducer.tasks
-    const [error, setError] = useState("")
-    const state = useSelector(allTasks)
+    const state = useSelector(allTask)
     const dispatch = useDispatch()
     const [taskName, setTaskName] = useState("")
     const [open, setOpen] = React.useState(false);
     const [idofTask, setIdOfTask] = useState("")
     const [task, setTask] = useState("")
-    const [show, setShow] = useState(true)
+    const [show, setShow] = useState(false)
+
     const handleClickOpen = (idofCurrentTask) => {
         setOpen(true);
         setIdOfTask(idofCurrentTask)
-
     };
 
     useEffect(() => {
-        const selectedUser = state.find(id => id.id === Number(idofTask))
+        const selectedUser = state.find(item => item.id === Number(idofTask))
         setTask(selectedUser)
     }, [idofTask])
 
     const handleClose = () => {
         setOpen(false);
-
         task && dispatch(editTask(task))
     };
+
     const handleAdduser = (e) => {
         setTaskName(e.target.value)
     }
@@ -44,7 +48,6 @@ export const Home = () => {
             dispatch(addTask(values))
 
         } else {
-            setError('Please Use Only Letters And Numbers')
             setTimeout(() => {
                 setShow(!show)
             }, 2000)
@@ -59,14 +62,13 @@ export const Home = () => {
         setTask({
             ...task,
             todo: e.target.value,
-
         })
     }
 
     return (
         <div>
             <div>
-                <p className="title">Task Manager</p>
+                <p className="title">{title}</p>
             </div>
             <div className="todo-wrapper">
                 <div className="input-section">
@@ -78,33 +80,37 @@ export const Home = () => {
                     <button className="createTodo-btn" onClick={handleAddTask}>Create</button>
                 </div>
                 <div >
-                    {show && <p className="error-message">{error}</p>}
+                    {show && <p className="error-message">{ERROR_MESSAGE}</p>}
                 </div>
                 {
                     state.map(item => {
                         return (
-                            <div className="todo-list" key={item && item.id}>
-                                <p className="todo-task">
-                                    {item.todo.toUpperCase()}
-                                </p>
-                                <div className="todo-btns">
-                                    <button className="delate-btn" onClick={() => handleDelate(item.id)}>Delate</button>
-                                    <button className="edit-btn" variant="outlined" onClick={() => handleClickOpen(item.id)}>Click to Edit</button>
-                                </div>
+                            <div key={item && item.id}>
+                                <TaskActions
+                                    item={item}
+                                    handleClickOpen={handleClickOpen}
+                                    handleDelate={handleDelate}
+                                />
                             </div>
                         )
                     })
                 }
-
             </div>
-            {state.length === 0 ? <p className="notask-message">! There Is No Task</p> : ""}
+            {state.length === 0 ?
+                <p className="notask-message">
+                    ! There Is No Task</p>
+                : ""
+            }
             <PopUp
                 handleClose={handleClose}
                 content={
                     <input className="popup-input" value={task && task.todo} onChange={handleChange} />
                 }
                 open={open}
+                labelClose={"Close"}
+                label={"Save"}
             />
+            <Tasks />
         </div >
     )
 }

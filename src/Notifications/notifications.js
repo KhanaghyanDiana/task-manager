@@ -1,0 +1,1 @@
+export const ERROR_MESSAGE = "Please insert only numbers and letters"
