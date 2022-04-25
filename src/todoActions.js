@@ -2,6 +2,7 @@ import { Button } from "./components/button"
 import React from "react"
 const TodoActions = (props) => {
     const { item, handleClickOpen, handleDelate } = props
+
     return (
         <div className="todo-list" >
             <p className="todo-task">
@@ -24,4 +25,4 @@ const TodoActions = (props) => {
         </div>
     )
 }
-export const TaskActions = React.memo(TodoActions)
+export const TaskActions = TodoActions

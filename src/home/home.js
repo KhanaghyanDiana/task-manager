@@ -6,6 +6,7 @@ import "./home.css"
 import { ERROR_MESSAGE } from "../Notifications/notifications";
 import { TaskActions } from "../todoActions";
 import { allTask } from "../Redux/selectors";
+import { Tasks } from "../javascript/tasks";
 
 export const Home = (props) => {
 
@@ -22,7 +23,6 @@ export const Home = (props) => {
     const handleClickOpen = (idofCurrentTask) => {
         setOpen(true);
         setIdOfTask(idofCurrentTask)
-
     };
 
     useEffect(() => {
@@ -95,7 +95,6 @@ export const Home = (props) => {
                         )
                     })
                 }
-
             </div>
             {state.length === 0 ?
                 <p className="notask-message">
@@ -111,6 +110,7 @@ export const Home = (props) => {
                 labelClose={"Close"}
                 label={"Save"}
             />
+            <Tasks />
         </div >
     )
 }

@@ -3,6 +3,7 @@ import React from "react";
 export const Button = (props) => {
     const { label, className, onClick, item } = props
 
+
     const handleClick = () => {
         onClick && onClick(item)
     }
@@ -11,7 +12,8 @@ export const Button = (props) => {
     return (
         <button
             className={className}
-            onClick={handleClick}>
+            onClick={handleClick}
+        >
             {label}
         </button>
     )
