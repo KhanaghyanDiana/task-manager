@@ -1,16 +1,19 @@
 // TASKS FOR LOOPS
 
+import { PromiceComp } from "./promice"
+
 // Решите эти задачи сначала через цикл while, а затем через цикл for.
 
 //  Выведите столбец чисел от 1 до 100.
-console.log(234564)
+
 let count = 0
 while (count <= 100) {
-    console.log(count++)
+    count++
+    console.log(count, "count")
 }
 
 for (let i = 0; i <= 100; i++) {
-    console.log(i++)
+    console.log(i, "i")
 }
 
 //  Выведите столбец четных чисел в промежутке от 0 до 100.
@@ -18,8 +21,9 @@ for (let i = 0; i <= 100; i++) {
 let evenNumber = 0
 while (evenNumber <= 100) {
     evenNumber++
-    if (evenNumber % 2 == 0) {
-        console.log(evenNumber)
+
+    if (!(evenNumber % 2)) {
+        console.log(evenNumber, "even")
     }
 }
 
@@ -33,6 +37,12 @@ while (initialNumber < 100) {
     let sum = initialNumber + initialNumber++
     console.log(sum, "sum")
 }
+// let summm = 0;
+// let nn = 1
+// while (nn <= 100) {
+//     summm += nn
+// }
+// console.log(summm, "789897")
 
 //  Дан массив с элементами [1, 2, 3, 4, 5]. С помощью цикла for выведите все эти элементы на экран.
 const arr = [1, 2, 3, 4, 5]
@@ -78,10 +88,10 @@ let sum = 0
 for (let i = 0; i < positiveNegativeNumber.length; i++) {
     if (positiveNegativeNumber[i] > 0) {
         sum += positiveNegativeNumber[i]
-        console.log(sum, "sumOfPositiveNumbers")
 
     }
 }
+console.log(sum, "sumOfPositiveNumbers")
 //  Дан массив с элементами 1, 2, 5, 9, 4, 13, 4, 10. С помощью цикла for и оператора if проверьте есть ли в массиве элемент со значением, равным 4. Если есть - выведите на экран 'Есть!' и выйдите из цикла. Если нет - ничего делать не надо.
 const arrr = [1, 2, 5, 9, 13, 10]
 for (let i = 0; i < arrr.length; i++) {
@@ -92,6 +102,9 @@ for (let i = 0; i < arrr.length; i++) {
 //  Дан массив числами, например: [10, 20, 30, 50,5000, 235, 3000].Выведите на экран только те числа из массива, которые начинаются на цифру 1, 2 или 5.
 
 const findInTheArray = [10, 20, 30, 50, 5000, 235, 3000]
+// let test = [10, 20, 30, 50, 235, 3000];
+
+// console.log(test.filter(num => ['1', '2', '5'].includes(num.toString()[0])));
 
 for (let i = 0; i < findInTheArray.length; i++) {
     const x = findInTheArray[i].toString()
@@ -99,6 +112,18 @@ for (let i = 0; i < findInTheArray.length; i++) {
         console.log(findInTheArray[i], "sssss")
     }
 }
+const findFirstDigitOfNumber = (num) => {
+    if (num > 10) {
+        return findFirstDigitOfNumber(num / 10)
+
+    } else {
+        return Math.floor(num)
+        // console.log(Math.floor(num), "mamamam")
+    }
+}
+findFirstDigitOfNumber(7520)
+
+
 
 //  Дан массив с элементами 1, 2, 3, 4, 5, 6, 7, 8, 9. С помощью цикла for создайте строку '-1-2-3-4-5-6-7-8-9-'.
 const xArr = [1, 2, 3, 4, 5, 6, 7, 8, 9]
@@ -130,18 +155,25 @@ for (let i = 0; i < daysInWeekSecond.length; i++) {
     if (i === date.getDay()) {
         console.log(`Today is ${daysInWeekSecond[i]}`)
     }
-
 }
 // Дано число n = 1000. Делите его на 2 столько раз, пока результат деления не станет меньше 50. Какое число получится ? Посчитайте количество итераций, необходимых для этого(итерация - это проход цикла), и запишите его в переменную num.
 
 let n = 1000
 while (n > 50) {
-    let n = n / 2
-    console.log("sum", n)
+    n = n / 2
+    console.log("sum222222222222222", n)
 
 }
+let h = 0; let initial = 1000
+while (initial > 50) {
+    initial = initial / 2
+    // h++
+    console.log(initial, "ksfajsfakj")
+}
+// console.log(h, "bcnmsbmabmna")
 export const Tasks = () => {
     return (
-        null
+
+        < PromiceComp />
     )
 }
